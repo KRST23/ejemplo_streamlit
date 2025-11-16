@@ -7,7 +7,7 @@ df = pd.read_csv("database_titanic.csv")
 
 # Muestra un título y una descripción en la aplicación Streamlit.
 st.write("""
-# Mi primera aplicación interactiva
+# LA primera aplicación interactiva
 ## Gráficos usando la base de datos del Titanic
 """)
 
