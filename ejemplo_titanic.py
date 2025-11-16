@@ -54,7 +54,7 @@ st.pyplot(fig)
 
 # Muestra un título y una descripción en la aplicación Streamlit.
 st.write("""
-## Gráfico de Sobrevivientes agrupados por sexo
+## Gráfico de Sobrevivientes por Sexo
 """)
 
 # ====== Donuts con cantidades (no porcentajes) de sobrevivientes por sexo ======
