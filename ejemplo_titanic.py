@@ -56,27 +56,55 @@ st.pyplot(fig)
 st.write("""
 ## Gráfico de Sobrevivientes agrupados por sexo
 """)
+# ===== Gráficos de sobrevivientes por sexo =====
 
-# Gráfico de torta: sobrevivientes por sexo
+# Filtrar sobrevivientes
 df_survived = df[df["Survived"] == 1]
 
 # Contar sobrevivientes por sexo
 surv_male = len(df_survived[df_survived["Sex"] == "male"])
 surv_female = len(df_survived[df_survived["Sex"] == "female"])
 
-# Crear gráfico de torta
-fig_surv, ax_surv = plt.subplots()
-ax_surv.pie(
-    [surv_male, surv_female],
-    labels=["Masculino", "Femenino"],
-    autopct="%1.1f%%",
-    startangle=90
-)
-ax_surv.set_title("Sobrevivientes por sexo")
+# Colores consistentes
+colors = ["#4A90E2", "#E94E77"]   # azul para masculino, rosado para femenino
 
-# Mostrar gráfico en Streamlit
-st.pyplot(fig_surv)
+# === Gráfico de barras moderno ===
+fig_bar, ax_bar = plt.subplots(figsize=(6,4))
 
+ax_bar.bar(["Masculino", "Femenino"], [surv_male, surv_female], 
+           color=colors, edgecolor="black")
+
+ax_bar.set_title("Total de sobrevivientes por sexo", fontsize=14)
+ax_bar.set_ylabel("Cantidad", fontsize=12)
+ax_bar.grid(axis="y", linestyle="--", alpha=0.4)
+
+st.pyplot(fig_bar)
+
+# === Gráficos de anillos (donut charts) por sexo ===
+fig_donut, axs = plt.subplots(1, 2, figsize=(10, 4))
+
+# Total general de sobrevivientes
+total_surv = surv_male + surv_female
+
+# Donut masculino
+axs[0].pie([surv_male, total_surv - surv_male],
+           labels=["", ""],
+           colors=[colors[0], "#DDDDDD"],
+           autopct=lambda pct: f"{pct:.1f}%" if pct > 0 else "",
+           startangle=90,
+           wedgeprops={"width": 0.4})
+axs[0].set_title("Porcentaje sobrevivientes (Masculino)")
+
+# Donut femenino
+axs[1].pie([surv_female, total_surv - surv_female],
+           labels=["", ""],
+           colors=[colors[1], "#DDDDDD"],
+           autopct=lambda pct: f"{pct:.1f}%" if pct > 0 else "",
+           startangle=90,
+           wedgeprops={"width": 0.4})
+axs[1].set_title("Porcentaje sobrevivientes (Femenino)")
+
+st.pyplot(fig_donut)
 
 
 
