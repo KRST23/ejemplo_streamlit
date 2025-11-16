@@ -69,11 +69,11 @@ total_female = len(df[df["Sex"] == "female"])
 non_female = total_female - surv_female
 
 # Colores consistentes (masculino, femenino)
-colors = ["#4A90E2", "#C41B46"]
+colors = ["#4A90E2", "#BE1BC4"]
 grey = "#DDDDDD"
 
 # Figura con dos donuts lado a lado
-fig, axs = plt.subplots(1, 2, figsize=(12, 5))
+fig, axs = plt.subplots(1, 2, figsize=(30, 5))
 
 # Donut masculino
 vals_m = [surv_male, non_male]
