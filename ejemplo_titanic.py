@@ -46,6 +46,42 @@ ax[1].set_title('Distribución de hombres y mujeres')
 # Desplegamos el gráfico
 st.pyplot(fig)
 
+
+
+
+
+
+
+# Muestra un título y una descripción en la aplicación Streamlit.
+st.write("""
+## Gráfico de Sobrevivientes agrupados por sexo
+""")
+
+# Gráfico de torta: sobrevivientes por sexo
+df_survived = df[df["Survived"] == 1]
+
+# Contar sobrevivientes por sexo
+surv_male = len(df_survived[df_survived["Sex"] == "male"])
+surv_female = len(df_survived[df_survived["Sex"] == "female"])
+
+# Crear gráfico de torta
+fig_surv, ax_surv = plt.subplots()
+ax_surv.pie(
+    [surv_male, surv_female],
+    labels=["Masculino", "Femenino"],
+    autopct="%1.1f%%",
+    startangle=90
+)
+ax_surv.set_title("Sobrevivientes por sexo")
+
+# Mostrar gráfico en Streamlit
+st.pyplot(fig_surv)
+
+
+
+
+
+
 st.write("""
 ## Muestra de datos cargados
 """)
