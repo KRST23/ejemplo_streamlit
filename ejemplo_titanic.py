@@ -56,56 +56,58 @@ st.pyplot(fig)
 st.write("""
 ## Gráfico de Sobrevivientes agrupados por sexo
 """)
-# ===== Gráficos de sobrevivientes por sexo =====
 
-# Filtrar sobrevivientes
-df_survived = df[df["Survived"] == 1]
+# ====== Donuts con cantidades (no porcentajes) de sobrevivientes por sexo ======
 
-# Contar sobrevivientes por sexo
-surv_male = len(df_survived[df_survived["Sex"] == "male"])
-surv_female = len(df_survived[df_survived["Sex"] == "female"])
+# Filtrar y contar desde el DataFrame
+surv_male = len(df[(df["Sex"] == "male") & (df["Survived"] == 1)])
+total_male = len(df[df["Sex"] == "male"])
+non_male = total_male - surv_male
 
-# Colores consistentes
-colors = ["#4A90E2", "#E94E77"]   # azul para masculino, rosado para femenino
+surv_female = len(df[(df["Sex"] == "female") & (df["Survived"] == 1)])
+total_female = len(df[df["Sex"] == "female"])
+non_female = total_female - surv_female
 
-# === Gráfico de barras moderno ===
-fig_bar, ax_bar = plt.subplots(figsize=(6,4))
+# Colores consistentes (masculino, femenino)
+colors = ["#4A90E2", "#E94E77"]
+grey = "#DDDDDD"
 
-ax_bar.bar(["Masculino", "Femenino"], [surv_male, surv_female], 
-           color=colors, edgecolor="black")
-
-ax_bar.set_title("Total de sobrevivientes por sexo", fontsize=14)
-ax_bar.set_ylabel("Cantidad", fontsize=12)
-ax_bar.grid(axis="y", linestyle="--", alpha=0.4)
-
-st.pyplot(fig_bar)
-
-# === Gráficos de anillos (donut charts) por sexo ===
-fig_donut, axs = plt.subplots(1, 2, figsize=(10, 4))
-
-# Total general de sobrevivientes
-total_surv = surv_male + surv_female
+# Figura con dos donuts lado a lado
+fig, axs = plt.subplots(1, 2, figsize=(12, 5))
 
 # Donut masculino
-axs[0].pie([surv_male, total_surv - surv_male],
-           labels=["", ""],
-           colors=[colors[0], "#DDDDDD"],
-           autopct=lambda pct: f"{pct:.1f}%" if pct > 0 else "",
-           startangle=90,
-           wedgeprops={"width": 0.4})
-axs[0].set_title("Porcentaje sobrevivientes (Masculino)")
+vals_m = [surv_male, non_male]
+labels_m = [f"Sobrevivientes ({surv_male})", f"No sobrevivientes ({non_male})"]
+axs[0].pie(
+    vals_m,
+    labels=labels_m,
+    colors=[colors[0], grey],
+    startangle=90,
+    wedgeprops={"width": 0.45, "edgecolor": "white"}
+)
+axs[0].set_title("Hombres — Sobrevivientes (cantidad)")
+# número grande en el centro del donut
+axs[0].text(0, 0, str(surv_male), ha="center", va="center", fontsize=16, fontweight="bold")
 
 # Donut femenino
-axs[1].pie([surv_female, total_surv - surv_female],
-           labels=["", ""],
-           colors=[colors[1], "#DDDDDD"],
-           autopct=lambda pct: f"{pct:.1f}%" if pct > 0 else "",
-           startangle=90,
-           wedgeprops={"width": 0.4})
-axs[1].set_title("Porcentaje sobrevivientes (Femenino)")
+vals_f = [surv_female, non_female]
+labels_f = [f"Sobrevivientes ({surv_female})", f"No sobrevivientes ({non_female})"]
+axs[1].pie(
+    vals_f,
+    labels=labels_f,
+    colors=[colors[1], grey],
+    startangle=90,
+    wedgeprops={"width": 0.45, "edgecolor": "white"}
+)
+axs[1].set_title("Mujeres — Sobrevivientes (cantidad)")
+axs[1].text(0, 0, str(surv_female), ha="center", va="center", fontsize=16, fontweight="bold")
 
-st.pyplot(fig_donut)
+# Asegurar aspecto igual para que los donuts sean circulares
+for ax in axs:
+    ax.axis("equal")
 
+# Mostrar en Streamlit
+st.pyplot(fig)
 
 
 
