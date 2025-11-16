@@ -57,7 +57,7 @@ st.write("""
 ## Gráfico de Sobrevivientes por Sexo
 """)
 
-# ====== Donuts con cantidades (no porcentajes) de sobrevivientes por sexo ======
+# ====== Gráfico de anillo de sobrevivientes por sexo ======
 
 # Filtrar y contar desde el DataFrame
 surv_male = len(df[(df["Sex"] == "male") & (df["Survived"] == 1)])
@@ -69,7 +69,7 @@ total_female = len(df[df["Sex"] == "female"])
 non_female = total_female - surv_female
 
 # Colores consistentes (masculino, femenino)
-colors = ["#4A90E2", "#E94E77"]
+colors = ["#4A90E2", "#C41B46"]
 grey = "#DDDDDD"
 
 # Figura con dos donuts lado a lado
