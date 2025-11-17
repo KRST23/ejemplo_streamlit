@@ -151,6 +151,34 @@ for ax in axs:
 st.pyplot(fig)
 
 
+
+# *****************************************************************
+# CÓDIGO AÑADIDO: Mostrar la cantidad absoluta
+# *****************************************************************
+
+st.markdown("---")
+st.write("### Cantidad absoluta de Sobrevivientes y No Sobrevivientes:")
+
+# Mostrar resultados para hombres
+st.markdown(f"""
+#### Hombres
+* **Sobrevivientes:** {surv_male}
+* **No Sobrevivientes:** {non_male}
+* **Total de Hombres:** {total_male}
+""")
+
+# Mostrar resultados para mujeres
+st.markdown(f"""
+#### Mujeres
+* **Sobrevivientes:** {surv_female}
+* **No Sobrevivientes:** {non_female}
+* **Total de Mujeres:** {total_female}
+""")
+
+# *****************************************************************
+# FIN CÓDIGO AÑADIDO
+# *****************************************************************
+
 st.write("""
 ## Muestra de datos cargados
 """)
