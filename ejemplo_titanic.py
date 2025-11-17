@@ -60,13 +60,38 @@ st.write("""
 # ====== Gráfico de anillo de sobrevivientes por sexo ======
 
 # Filtrar y contar desde el DataFrame
-surv_male = len(df[(df["Sex"] == "male") & (df["Survived"] == 1)])
-total_male = len(df[df["Sex"] == "male"])
-non_male = total_male - surv_male
+#surv_male = len(df[(df["Sex"] == "male") & (df["Survived"] == 1)])
+#total_male = len(df[df["Sex"] == "male"])
+#non_male = total_male - surv_male
 
-surv_female = len(df[(df["Sex"] == "female") & (df["Survived"] == 1)])
-total_female = len(df[df["Sex"] == "female"])
-non_female = total_female - surv_female
+#surv_female = len(df[(df["Sex"] == "female") & (df["Survived"] == 1)])
+#total_female = len(df[df["Sex"] == "female"])
+#non_female = total_female - surv_female
+
+
+
+
+
+perc_surv_male = (surv_male / total_male) * 100
+
+# Porcentaje de hombres que NO sobrevivieron
+perc_non_male = (non_male / total_male) * 100
+# O también se puede calcular como:
+# perc_non_male = 100 - perc_surv_male
+
+
+# --- Porcentajes para Mujeres ---
+# Porcentaje de mujeres que sobrevivieron
+perc_surv_female = (surv_female / total_female) * 100
+
+# Porcentaje de mujeres que NO sobrevivieron
+perc_non_female = (non_female / total_female) * 100
+# O también se puede calcular como:
+# perc_non_female = 100 - perc_surv_female
+
+
+
+
 
 # Colores consistentes (masculino, femenino)
 colors = ["#4A90E2", "#BE1BC4"]
