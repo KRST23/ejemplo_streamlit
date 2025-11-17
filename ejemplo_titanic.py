@@ -59,74 +59,119 @@ st.write("""
 
 # ====== Gráfico de anillo de sobrevivientes por sexo ======
 
+
+
 # Filtrar y contar desde el DataFrame
+
 surv_male = len(df[(df["Sex"] == "male") & (df["Survived"] == 1)])
+
 total_male = len(df[df["Sex"] == "male"])
+
 non_male = total_male - surv_male
 
+
+
 surv_female = len(df[(df["Sex"] == "female") & (df["Survived"] == 1)])
+
 total_female = len(df[df["Sex"] == "female"])
+
 non_female = total_female - surv_female
 
-####################
 
-# Porcentajes masculinos
-perc_surv_male = (surv_male / total_male) * 100
-perc_non_male = (non_male / total_male) * 100
 
-# Porcentajes femeninos
-perc_surv_female = (surv_female / total_female) * 100
-perc_non_female = (non_female / total_female) * 100
 
-#####################
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Colores consistentes (masculino, femenino)
+
 colors = ["#4A90E2", "#BE1BC4"]
+
 grey = "#DDDDDD"
 
+
+
 # Figura con dos donuts lado a lado
+
 fig, axs = plt.subplots(1, 2, figsize=(12, 3))
 
+
+
 # Donut masculino
-vals_m = [perc_surv_male, perc_non_male]
-labels_m = [
-    f"Sobrevivientes ({perc_surv_male:.1f}%)",
-    f"No sobrevivientes ({perc_non_male:.1f}%)",
-]
+
+vals_m = [surv_male, non_male]
+
+labels_m = [f"Sobrevivientes ({surv_male})", f"No sobrevivientes ({non_male})"]
+
 axs[0].pie(
+
     vals_m,
+
     labels=labels_m,
+
     colors=[colors[0], grey],
+
     startangle=90,
+
     wedgeprops={"width": 0.45, "edgecolor": "white"}
+
 )
+
 axs[0].set_title("Hombres — Sobrevivientes (cantidad)")
+
 # número grande en el centro del donut
-axs[0].text(0, 0, str(perc_surv_male), ha="center", va="center", fontsize=16, fontweight="bold")
+
+axs[0].text(0, 0, str(surv_male), ha="center", va="center", fontsize=16, fontweight="bold")
+
+
 
 # Donut femenino
-vals_f = [perc_surv_female, perc_non_female]
-labels_f = [
-    f"Sobrevivientes ({perc_surv_female:.1f}%)",
-    f"No sobrevivientes ({perc_non_female:.1f}%)",
-]
+
+vals_f = [surv_female, non_female]
+
+labels_f = [f"Sobrevivientes ({surv_female})", f"No sobrevivientes ({non_female})"]
+
 axs[1].pie(
+
     vals_f,
+
     labels=labels_f,
+
     colors=[colors[1], grey],
+
     startangle=90,
+
     wedgeprops={"width": 0.45, "edgecolor": "white"}
+
 )
+
 axs[1].set_title("Mujeres — Sobrevivientes (cantidad)")
-axs[1].text(0, 0, str(perc_surv_female), ha="center", va="center", fontsize=16, fontweight="bold")
+
+axs[1].text(0, 0, str(surv_female), ha="center", va="center", fontsize=16, fontweight="bold")
+
+
 
 # Asegurar aspecto igual para que los donuts sean circulares
+
 for ax in axs:
+
     ax.axis("equal")
 
-# Mostrar en Streamlit
-st.pyplot(fig)
 
+
+# Mostrar en Streamlit
+
+st.pyplot(fig)
 
 
 
