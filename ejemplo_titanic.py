@@ -48,10 +48,6 @@ st.pyplot(fig)
 
 
 
-
-
-
-
 # Muestra un título y una descripción en la aplicación Streamlit.
 st.write("""
 ## Gráfico de Sobrevivientes por Sexo
@@ -59,120 +55,100 @@ st.write("""
 
 # ====== Gráfico de anillo de sobrevivientes por sexo ======
 
-
-
 # Filtrar y contar desde el DataFrame
-
 surv_male = len(df[(df["Sex"] == "male") & (df["Survived"] == 1)])
-
 total_male = len(df[df["Sex"] == "male"])
-
 non_male = total_male - surv_male
 
-
-
 surv_female = len(df[(df["Sex"] == "female") & (df["Survived"] == 1)])
-
 total_female = len(df[df["Sex"] == "female"])
-
 non_female = total_female - surv_female
 
+# *****************************************************************
+# CÓDIGO AÑADIDO: Cálculo de porcentajes
+# *****************************************************************
 
+# Porcentajes masculinos
+perc_surv_male = (surv_male / total_male) * 100
+perc_non_male = (non_male / total_male) * 100
 
+# Porcentajes femeninos
+perc_surv_female = (surv_female / total_female) * 100
+perc_non_female = (non_female / total_female) * 100
 
-
-
-
-
-
-
-
-
-
-
-
-
+# *****************************************************************
+# FIN CÓDIGO AÑADIDO
+# *****************************************************************
 
 # Colores consistentes (masculino, femenino)
-
 colors = ["#4A90E2", "#BE1BC4"]
-
 grey = "#DDDDDD"
 
-
-
 # Figura con dos donuts lado a lado
-
 fig, axs = plt.subplots(1, 2, figsize=(12, 3))
 
-
-
 # Donut masculino
-
-vals_m = [surv_male, non_male]
-
-labels_m = [f"Sobrevivientes ({surv_male})", f"No sobrevivientes ({non_male})"]
-
+# CAMBIO: Usar porcentajes para los valores del gráfico (vals_m)
+vals_m = [perc_surv_male, perc_non_male]
+# CAMBIO: Usar porcentajes y formatear con un decimal para las etiquetas (labels_m)
+labels_m = [
+    f"Sobrevivientes ({perc_surv_male:.1f}%)",
+    f"No sobrevivientes ({perc_non_male:.1f}%)",
+]
 axs[0].pie(
-
     vals_m,
-
     labels=labels_m,
-
     colors=[colors[0], grey],
-
     startangle=90,
-
-    wedgeprops={"width": 0.45, "edgecolor": "white"}
-
+    wedgeprops={"width": 0.45, "edgecolor": "white"},
 )
-
-axs[0].set_title("Hombres — Sobrevivientes (cantidad)")
-
-# número grande en el centro del donut
-
-axs[0].text(0, 0, str(surv_male), ha="center", va="center", fontsize=16, fontweight="bold")
-
-
+# CAMBIO: Título actualizado
+axs[0].set_title("Hombres — Sobrevivientes (porcentaje)")
+# CAMBIO: número grande en el centro del donut (mostrar porcentaje)
+axs[0].text(
+    0,
+    0,
+    f"{perc_surv_male:.1f}%",
+    ha="center",
+    va="center",
+    fontsize=16,
+    fontweight="bold",
+)
 
 # Donut femenino
-
-vals_f = [surv_female, non_female]
-
-labels_f = [f"Sobrevivientes ({surv_female})", f"No sobrevivientes ({non_female})"]
-
+# CAMBIO: Usar porcentajes para los valores del gráfico (vals_f)
+vals_f = [perc_surv_female, perc_non_female]
+# CAMBIO: Usar porcentajes y formatear con un decimal para las etiquetas (labels_f)
+labels_f = [
+    f"Sobrevivientes ({perc_surv_female:.1f}%)",
+    f"No sobrevivientes ({perc_non_female:.1f}%)",
+]
 axs[1].pie(
-
     vals_f,
-
     labels=labels_f,
-
     colors=[colors[1], grey],
-
     startangle=90,
-
-    wedgeprops={"width": 0.45, "edgecolor": "white"}
-
+    wedgeprops={"width": 0.45, "edgecolor": "white"},
+)
+# CAMBIO: Título actualizado
+axs[1].set_title("Mujeres — Sobrevivientes (porcentaje)")
+# CAMBIO: número grande en el centro del donut (mostrar porcentaje)
+axs[1].text(
+    0,
+    0,
+    f"{perc_surv_female:.1f}%",
+    ha="center",
+    va="center",
+    fontsize=16,
+    fontweight="bold",
 )
 
-axs[1].set_title("Mujeres — Sobrevivientes (cantidad)")
-
-axs[1].text(0, 0, str(surv_female), ha="center", va="center", fontsize=16, fontweight="bold")
-
-
-
 # Asegurar aspecto igual para que los donuts sean circulares
-
 for ax in axs:
-
     ax.axis("equal")
 
-
-
 # Mostrar en Streamlit
-
 st.pyplot(fig)
-
 
 
 st.write("""
