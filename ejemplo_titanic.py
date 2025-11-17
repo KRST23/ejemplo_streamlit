@@ -82,7 +82,7 @@ axs[0].pie(
     vals_m,
     labels=labels_m,
     colors=[colors[0], grey],
-    startangle=90,
+    startangle=9,
     wedgeprops={"width": 0.45, "edgecolor": "white"}
 )
 axs[0].set_title("Hombres — Sobrevivientes (cantidad)")
