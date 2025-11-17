@@ -89,7 +89,10 @@ fig, axs = plt.subplots(1, 2, figsize=(12, 3))
 
 # Donut masculino
 vals_m = [perc_surv_male, perc_non_male]
-labels_m = [f"Sobrevivientes ({perc_surv_male})", f"No sobrevivientes ({perc_non_male})"]
+labels_m = [
+    f"Sobrevivientes ({perc_surv_male:.1f}%)",
+    f"No sobrevivientes ({perc_non_male:.1f}%)",
+]
 axs[0].pie(
     vals_m,
     labels=labels_m,
@@ -103,7 +106,10 @@ axs[0].text(0, 0, str(perc_surv_male), ha="center", va="center", fontsize=16, fo
 
 # Donut femenino
 vals_f = [perc_surv_female, perc_non_female]
-labels_f = [f"Sobrevivientes ({perc_surv_female})", f"No sobrevivientes ({perc_non_female})"]
+labels_f = [
+    f"Sobrevivientes ({perc_surv_female:.1f}%)",
+    f"No sobrevivientes ({perc_non_female:.1f}%)",
+]
 axs[1].pie(
     vals_f,
     labels=labels_f,
