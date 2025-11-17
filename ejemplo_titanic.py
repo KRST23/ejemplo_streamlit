@@ -73,7 +73,7 @@ colors = ["#4A90E2", "#BE1BC4"]
 grey = "#DDDDDD"
 
 # Figura con dos donuts lado a lado
-fig, axs = plt.subplots(1, 2, figsize=(12, 0))
+fig, axs = plt.subplots(1, 2, figsize=(12, 3))
 
 # Donut masculino
 vals_m = [surv_male, non_male]
