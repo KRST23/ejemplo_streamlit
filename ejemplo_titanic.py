@@ -73,7 +73,7 @@ colors = ["#4A90E2", "#BE1BC4"]
 grey = "#DDDDDD"
 
 # Figura con dos donuts lado a lado
-fig, axs = plt.subplots(1, 2, figsize=(12, 5))
+fig, axs = plt.subplots(1, 2, figsize=(12, 0))
 
 # Donut masculino
 vals_m = [surv_male, non_male]
@@ -82,7 +82,7 @@ axs[0].pie(
     vals_m,
     labels=labels_m,
     colors=[colors[0], grey],
-    
+    startangle=90,
     wedgeprops={"width": 0.45, "edgecolor": "white"}
 )
 axs[0].set_title("Hombres — Sobrevivientes (cantidad)")
