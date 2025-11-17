@@ -60,15 +60,22 @@ st.write("""
 # ====== Gráfico de anillo de sobrevivientes por sexo ======
 
 # Filtrar y contar desde el DataFrame
-surv_male = len(df[(df["Sex"] == "male") & (df["Survived"] == 1)]*100)
+surv_male = len(df[(df["Sex"] == "male") & (df["Survived"] == 1)])
 total_male = len(df[df["Sex"] == "male"])
 non_male = total_male - surv_male
 
-surv_female = len(df[(df["Sex"] == "female") & (df["Survived"] == 1)]*100)
+surv_female = len(df[(df["Sex"] == "female") & (df["Survived"] == 1)])
 total_female = len(df[df["Sex"] == "female"])
 non_female = total_female - surv_female
 
 
+
+# Calcular porcentajes (con manejo de división por cero)
+perc_surv_male = (surv_male / total_male) * 100 if total_male > 0 else 0
+perc_non_male = (non_male / total_male) * 100 if total_male > 0 else 0
+
+perc_surv_female = (surv_female / total_female) * 100 if total_female > 0 else 0
+perc_non_female = (non_female / total_female) * 100 if total_female > 0 else 0
 
 
 
